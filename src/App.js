@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import List from './List'
+import Items from './Item'
 import './App.css'
 
 class App extends Component {
@@ -11,38 +12,41 @@ class App extends Component {
     }
   }
 
-  inputElement = React.createRef()
-
   add = e => {
     e.preventDefault();
     console.log('New Input')
-    const newItem = this.state.currentItem
+    var newItem = this.state.currentItem
     if (newItem.text !== '') {
       console.log(newItem)
-      const items = [...this.state.items, newItem]
+      var newItems = [...this.state.items, newItem]
       this.setState({
-        items: items,
+        items: newItems,
         currentItem: { text: '', key: '' },
       })
     }
   }
 
   handleInput = e => {
-    const itemText = e.target.value
-    const currentItem = { text: itemText, key: Date.now() }
+    var itemText = e.target.value
+    var currentItem = { text: itemText, key: Date.now() }
     this.setState({
       currentItem
     })
+  }
+
+  delete = item => {
+    const 
   }
 
   render() {
     return (
       <div className="App">
         <List add={this.add}
-              inputElement={this.inputElement}
+              inputElement={this.state.currentItem.text}
               currentItem={this.state.currentItem}
               handleInput={this.handleInput}
         />
+        <Items items={this.state.items} delete={this.delete}/>
       </div>
     )
   }
