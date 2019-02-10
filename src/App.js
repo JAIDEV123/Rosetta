@@ -34,8 +34,13 @@ class App extends Component {
     })
   }
 
-  delete = item => {
-    const 
+  check = item, key => {
+    return item.key != key
+  }
+
+  delete = key => {
+    var newItems = this.state.items.filter(item => check(item, key))
+    this.setState({item: newItems})
   }
 
   render() {
